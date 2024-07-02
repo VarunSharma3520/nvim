@@ -22,4 +22,7 @@ M.ui = {
   },
 }
 
+-- require("custom.snippets")
+
+
 return M

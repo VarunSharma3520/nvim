@@ -11,3 +11,9 @@ map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+
+-- snippets
+vim.api.nvim_set_keymap("i", "<C-k>", "<cmd>lua require('luasnip').expand_or_jump()<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("s", "<C-k>", "<cmd>lua require('luasnip').expand_or_jump()<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("s", "<C-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", { silent = true, noremap = true })
