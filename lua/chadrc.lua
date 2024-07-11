@@ -5,9 +5,12 @@
 local M = {}
 
 M.ui = {
-  theme = "jellybeans",
+  theme = "bearded-arc",
 
   hl_override = {
+    Normal = { bg = "NONE" },
+    NvimTreeNormal = { bg = "NONE" },
+    NvimTreeEndOfBuffer = { bg = "NONE" },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
   },
