@@ -6,7 +6,9 @@ local M = {}
 
 M.ui = {
   theme = "bearded-arc",
-
+  tabufline = {
+    enabled= false
+  },
   hl_override = {
     Normal = { bg = "NONE" },
     NvimTreeNormal = { bg = "NONE" },

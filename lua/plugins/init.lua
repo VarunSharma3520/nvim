@@ -83,15 +83,15 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-	{ "honza/vim-snippets",
-    lazy = false 
-  },
-	{
-		"SirVer/ultisnips",
-		lazy = true,
-	},
-	{
-		"rafamadriz/friendly-snippets",
-		lazy = false,
-	},
+	-- { "honza/vim-snippets",
+	--    lazy = false 
+	--  },
+	-- {
+	-- 	"SirVer/ultisnips",
+	-- 	lazy = true,
+	-- },
+	-- {
+	-- 	"rafamadriz/friendly-snippets",
+	-- 	lazy = false,
+	-- },
 }
