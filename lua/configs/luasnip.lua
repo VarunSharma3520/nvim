@@ -1,5 +1,7 @@
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
@@ -11,11 +13,19 @@ ls.config.set_config({
 })
 
 ls.add_snippets("python", {
+  	s("zxydefde", {
+		t("def"),
+		i(1, "name"),
+		t("("),
+		i(2, "argsji"),
+		t({ "):", "\t" }),
+		i(0, "pass"),
+	}),
 	s("def", {
 		t("def"),
 		i(1, "name"),
 		t("("),
-		i(2, "args"),
+		i(2, "argsji"),
 		t({ "):", "\t" }),
 		i(0, "pass"),
 	}),
@@ -141,4 +151,3 @@ ls.add_snippets("rust", {
 	}),
 })
 
-require("luasnip.loaders.from_vscode").lazy_load()

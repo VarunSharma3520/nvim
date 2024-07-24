@@ -27,7 +27,6 @@ M.ui = {
   },
 }
 
--- require("custom.snippets")
-
+require "configs.luasnip"
 
 return M

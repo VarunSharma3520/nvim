@@ -26,7 +26,7 @@ return {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
 	},
-	{ "neoclide/coc.nvim", branch = "release", lazy = false },
+	-- { "neoclide/coc.nvim", branch = "release", lazy = false },
 	{
 		"williamboman/mason.nvim",
 		opts = {
@@ -77,21 +77,57 @@ return {
 		},
 	},
 	{
+		"windwp/nvim-ts-autotag",
+		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
 		"L3MON4D3/LuaSnip",
 		lazy = false,
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-	-- { "honza/vim-snippets",
-	--    lazy = false 
-	--  },
-	-- {
-	-- 	"SirVer/ultisnips",
-	-- 	lazy = true,
-	-- },
-	-- {
-	-- 	"rafamadriz/friendly-snippets",
-	-- 	lazy = false,
-	-- },
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {
+			user_default_options = {
+				tailwind = true,
+			},
+		},
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+		},
+		opts = function(_, opts)
+			-- original LazyVim kind icon formatter
+			local format_kinds = opts.formatting.format
+			opts.formatting.format = function(entry, item)
+				format_kinds(entry, item) -- add icons
+				return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+			end
+		end,
+	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{ "honza/vim-snippets", lazy = true },
+	{
+		"SirVer/ultisnips",
+		lazy = true,
+	},
+	{
+		"rafamadriz/friendly-snippets",
+		lazy = false,
+	},
+  {
+  'Exafunction/codeium.vim',
+  event = 'BufEnter'
+},
 }
