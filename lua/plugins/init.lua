@@ -126,8 +126,8 @@ return {
 		"rafamadriz/friendly-snippets",
 		lazy = false,
 	},
-  {
-  'Exafunction/codeium.vim',
-  event = 'BufEnter'
-},
+	{
+		"Exafunction/codeium.vim",
+		event = "BufEnter",
+	},
 }
