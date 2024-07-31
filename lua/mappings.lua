@@ -72,7 +72,6 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "file copy whole" })
 
 -- these keep the cursor in the middle when scrolling with ctrl d and u
 map("n", "<C-d>", "<C-d>zz")
