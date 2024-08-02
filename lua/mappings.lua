@@ -1,8 +1,13 @@
 require "nvchad.mappings"
 local map = vim.keymap.set
 
+-- Ensure Telescope is loaded
+local telescope = require('telescope')
 local ls = require("luasnip")
 local harpoon = require("harpoon")
+
+-- Load the LuaSnip extension for Telescope
+telescope.load_extension('luasnip')
 
 -- REQUIRED
 harpoon:setup()
@@ -25,6 +30,7 @@ map({"i","v","c"}, "jk", "<ESC>", { desc = "enter normal mode" })
 map("n", "<leader>wq", ":wq<CR>", { desc = "write and quit" })
 map("n", "<Leader>qq", ":q!<CR>", { desc = "quit with force" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr><ESC>", { desc = "quit with force" })
+map('n', '<leader><leader>', '<cmd>lua require("telescope").extensions.luasnip.luasnip()<CR>', { desc = "finds snippets in telescope" })
 
 --selects all content of a file
 map( "n", "<leader>sa", "gg0vG$", { desc = "selects all text in a file" })

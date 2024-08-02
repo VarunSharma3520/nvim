@@ -61,4 +61,3 @@ vim.api.nvim_create_autocmd("BufLeave", {
   command = "silent! w"
 })
 
-
