@@ -13,14 +13,6 @@ ls.config.set_config({
 })
 
 ls.add_snippets("python", {
-  	s("zxydefde", {
-		t("def"),
-		i(1, "name"),
-		t("("),
-		i(2, "argsji"),
-		t({ "):", "\t" }),
-		i(0, "pass"),
-	}),
 	s("def", {
 		t("def"),
 		i(1, "name"),

@@ -27,6 +27,5 @@ M.ui = {
   },
 }
 
-require "configs.luasnip"
 
 return M
