@@ -89,7 +89,7 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("configs.luasnip")
-		end
+		end,
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -103,7 +103,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
-      "mlaursen/vim-react-snippets",
+			"mlaursen/vim-react-snippets",
 		},
 		opts = function(_, opts)
 			-- original LazyVim kind icon formatter
@@ -169,6 +169,7 @@ return {
 		"Exafunction/codeium.vim",
 		event = "BufEnter",
 	},
+	{ "debugloop/telescope-undo.nvim" },
 	{
 		"benfowler/telescope-luasnip.nvim",
 		dependencies = {

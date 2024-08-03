@@ -8,11 +8,18 @@ local harpoon = require("harpoon")
 
 -- Load the LuaSnip extension for Telescope
 telescope.load_extension('luasnip')
+telescope.load_extension("undo")
+telescope.load_extension("harpoon")
+
+-- map("n", "<leader>fr", "<cmd>Telescope reloader<cr>", { desc = "telescope reloader" })
+map("n", "<leader>ft", "<cmd>Telescope harpoon marks<cr>", { desc = "telescope harpoon marks" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "telescope keymaps" })
+map("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "telescope undo" })
 
 -- REQUIRED
 harpoon:setup()
 map("n", "<leader>ww", function() harpoon:list():add() end, { desc = "window add in harpoon" })
-map("n", "<leader>wv", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "window view toggle harpoon" })
+-- map('n', '<leader>wd', function() require("harpoon.mark").rm_file() end, { desc = "Delete current file from Harpoon" })
 map("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "1st window via harpoon" })
 map("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "2st window via harpoon" })
 map("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "3rd window via harpoon" })
