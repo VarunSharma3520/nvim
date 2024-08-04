@@ -181,4 +181,8 @@ return {
 			require("telescope").load_extension("luasnip")
 		end,
 	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
 }

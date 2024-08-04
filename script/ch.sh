@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Define an array of options
 options=(
   "google"
@@ -7,10 +8,16 @@ options=(
   "duckduckgo"
   "w3schools"
   "express docs"
+  "bash devhint"
   "mongoose docs"
   "tailwindcss docs"
   "react docs"
-  "rust docs"
+  "rust-lang book"
+  "go docs"
+  "rustc book"
+  "rustdoc"
+  "rust-clippy book"
+  "cargo book"
   "pypi"
   "npm registry"
   "github/code"
@@ -23,7 +30,7 @@ options=(
 
 # Function to URL-encode a string using Python
 url_encode() {
-    python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$1"
+  python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$1"
 }
 
 # Display a list of options using fzf
@@ -35,6 +42,12 @@ case $selected_option in
         # Open the URL in Brave browser
         brave-browser "https://expressjs.com/en/4x/api.html"
         ;;
+
+    "bash devhint")
+        # Open the URL in Brave browser
+        brave-browser "https://devhints.io/bash"
+        ;;
+
    "mongoose docs")
         # Open the URL in Brave browser
         brave-browser "https://mongoosejs.com/docs/"
@@ -65,9 +78,30 @@ case $selected_option in
         brave-browser "https://go.dev/doc/"
         ;;
 
-    "rust docs")
+    "cargo book")
         # Open the URL in Brave browser
-        brave-browser "https://doc.rust-lang.org/book/"
+        brave-browser "https://doc.rust-lang.org/beta/cargo/index.html"
+        ;;
+
+    "rustc book")
+        # Open the URL in Brave browser
+        brave-browser "https://doc.rust-lang.org/beta/rustc/index.html"
+        ;;
+
+    "rustdoc")
+        # Open the URL in Brave browser
+        brave-browser "https://doc.rust-lang.org/beta/rustdoc/index.html"
+        ;;
+
+    "rust-clippy book")
+        # Open the URL in Brave browser
+        brave-browser "https://doc.rust-lang.org/beta/clippy/index.html"
+        ;;
+
+
+    "rust-lang book")
+        # Open the URL in Brave browser
+        brave-browser "https://doc.rust-lang.org/book/index.html"
         ;;
 
     "react docs")

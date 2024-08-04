@@ -1,34 +1,35 @@
-require "nvchad.mappings"
+require 'nvchad.mappings'
 local map = vim.keymap.set
 
--- Ensure Telescope is loaded
 local telescope = require('telescope')
 local ls = require("luasnip")
 local harpoon = require("harpoon")
 
+-- REQUIRED
+harpoon.setup()
+
 -- Load the LuaSnip extension for Telescope
 telescope.load_extension('luasnip')
-telescope.load_extension("undo")
-telescope.load_extension("harpoon")
+telescope.load_extension('file_browser')
+telescope.load_extension('undo')
+telescope.load_extension('harpoon')
 
--- map("n", "<leader>fr", "<cmd>Telescope reloader<cr>", { desc = "telescope reloader" })
+map("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "telescope file browser" })
 map("n", "<leader>ft", "<cmd>Telescope harpoon marks<cr>", { desc = "telescope harpoon marks" })
 map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "telescope keymaps" })
 map("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "telescope undo" })
 
--- REQUIRED
-harpoon:setup()
-map("n", "<leader>ww", function() harpoon:list():add() end, { desc = "window add in harpoon" })
--- map('n', '<leader>wd', function() require("harpoon.mark").rm_file() end, { desc = "Delete current file from Harpoon" })
-map("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "1st window via harpoon" })
-map("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "2st window via harpoon" })
-map("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "3rd window via harpoon" })
-map("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "4th window via harpoon" })
-map("n", "<leader>wp", function() harpoon:list():prev() end, { desc = "prev window via harpoon" })
-map("n", "<leader>wn", function() harpoon:list():next() end, { desc = "next window via harpoon" })
+map("n", "<leader>ww", function() harpoon.list():add() end, { desc = "window add in harpoon" })
+map("n", "<leader>wd", function() require("harpoon.mark").remove_file() end, { desc = "Delete current file from Harpoon" })
+map("n", "<leader>1", function() harpoon.list():select(1) end, { desc = "1st window via harpoon" })
+map("n", "<leader>2", function() harpoon.list():select(2) end, { desc = "2nd window via harpoon" })
+map("n", "<leader>3", function() harpoon.list():select(3) end, { desc = "3rd window via harpoon" })
+map("n", "<leader>4", function() harpoon.list():select(4) end, { desc = "4th window via harpoon" })
+map("n", "<leader>wp", function() harpoon.list():prev() end, { desc = "prev window via harpoon" })
+map("n", "<leader>wn", function() harpoon.list():next() end, { desc = "next window via harpoon" })
 
 -- these keymaps allow you to take highlighted text and then move it up and down with JK
-map("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+map("v" , "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 map("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- add yours here
