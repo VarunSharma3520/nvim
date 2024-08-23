@@ -6,7 +6,8 @@ return {
 			require("configs.conform")
 		end,
 	},
-	{
+ -- LSP-related configurations from the `configs.lspconfig` module.
+ 	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("nvchad.configs.lspconfig").defaults()
