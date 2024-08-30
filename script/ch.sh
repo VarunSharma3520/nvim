@@ -12,6 +12,7 @@ options=(
   "mongoose docs"
   "tailwindcss docs"
   "react docs"
+  "nextjs"
   "rust-lang book"
   "go docs"
   "rustc book"
@@ -107,6 +108,11 @@ case $selected_option in
     "react docs")
         # Open the URL in Brave browser
         brave-browser "https://react.dev/"
+        ;;
+    
+    "nextjs")
+        # Open the URL in Brave browser
+        brave-browser "https://nextjs.org/"
         ;;
 
     "github/code")
