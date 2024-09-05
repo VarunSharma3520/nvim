@@ -27,6 +27,7 @@ options=(
   "phind"
   "gemini"
   "exit"
+  "tauri docs"
 )
 
 # Function to URL-encode a string using Python
@@ -128,6 +129,11 @@ case $selected_option in
     "tailwindcss docs")
         # Open the URL in Brave browser
         brave-browser "https://tailwindcss.com/docs/installation"
+        ;;
+
+    "tauri docs")
+        # Open the URL in Brave browser
+        brave-browser "https://tauri.app/v1/api"
         ;;
 
     "chatGPT")
