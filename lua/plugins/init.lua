@@ -6,8 +6,8 @@ return {
 			require("configs.conform")
 		end,
 	},
- -- LSP-related configurations from the `configs.lspconfig` module.
- 	{
+	-- LSP-related configurations from the `configs.lspconfig` module.
+	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("nvchad.configs.lspconfig").defaults()
@@ -185,5 +185,12 @@ return {
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
+	{
+		"sourcegraph/sg.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+
+		-- If you have a recent version of lazy.nvim, you don't need to add this!
+		build = "nvim -l build/init.lua",
 	},
 }

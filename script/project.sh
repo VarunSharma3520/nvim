@@ -25,6 +25,8 @@
 
 options=(
     ".config/nvim"
+    "gatishakti - web"
+    "Gatishakti - desk"
     "test"
     "code"
     "code/notes"
@@ -42,6 +44,14 @@ case $selected_option in
 
 "exit")
     exit
+    ;;
+
+"gatishakti - web")
+    cd gatishakti/ && nvim .
+    ;;
+
+"Gatishakti - desk")
+    cd ~/Gatishakti/ && nvim .
     ;;
 
 "devi")
