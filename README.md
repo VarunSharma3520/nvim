@@ -8,7 +8,7 @@ git clone https://github.com/VarunSharma3520/nvim.git && mv nvim ~/.config/ && n
 
 ### Comamand to Start GitHub Codespace
 ```bash
-sudo docker run -p 3000:3000 -p 3001:3001 -v $(pwd):/code --rm -it mcr.microsoft.com/devcontainers/base
+docker run -p 3000:3000 -p 3001:3001 -v $(pwd):/code --rm -it mcr.microsoft.com/vscode/devcontainers/universal /bin/sh
 ```
 
 
