@@ -1,7 +1,8 @@
 require "nvchad.options"
 
--- add yours here!
+vim.g.vscode_snippets_path = vim.fn.expand("~/.config/Code/User/snippets")
 
+-- add yours here!
 local opt = vim.o
 opt.cursorlineopt ='both' -- to enable cursorline!
 opt.relativenumber = true -- to enable relativenumber!
