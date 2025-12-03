@@ -79,7 +79,7 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
-    lazy = false,
+		lazy = false,
 		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		config = function()
 			require("nvim-ts-autotag").setup()
@@ -187,6 +187,14 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
+	-- {
+	-- 	"tadmccorkle/markdown.nvim",
+	-- 	ft = { "markdown" }, -- or 'event = "VeryLazy"'
+	-- 	opts = {
+	--      conceal = true,
+	-- 		-- configuration here or empty for defaults
+	-- 	},
+	-- },
 	{
 		"sourcegraph/sg.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
