@@ -40,6 +40,18 @@ Why: manage themes and extensions easily.
 sudo apt install -y gnome-tweaks gnome-shell-extensions gnome-shell-extension-manager && gnome-tweaks --version || echo "GNOME Tweaks installed (open via Activities)."
 ```
 
+- App Icons Taskbar
+
+- CHCE
+
+- Clipboard History
+
+- Forge
+
+- GSConnect
+
+- Just Perfection
+
 ---
 
 ## 5) Install Docker (official)
