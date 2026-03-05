@@ -279,7 +279,23 @@ sudo mouseless --config ~/.config/mouseless/config.yaml
 
 > Note: the mouseless binary is installed in /usr/local/bin/mouseless. You may need to add this to your PATH.
 
+## 11) Install tmux
 
+```bash
+sudo apt install tmux && tmux -v
+```
+
+find tmux configuration in [this](https://github.com/VarunSharma3520/nvim/blob/main/.tmux.conf) repo
+
+if git cloned nvim
+
+then run
+
+```bash
+tmux source-file ~/.config/nvim/.tmux.conf
+```
+
+and all set!
 
 
 
