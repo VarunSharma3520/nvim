@@ -1,58 +1,68 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+
+-- Base46 cache path (required by NvChad)
+vim.g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
 
 vim.g.mapleader = " "
+vim.opt.clipboard = "unnamedplus"
 
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+--------------------------------------------------
+-- Bootstrap lazy.nvim
+--------------------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require "configs.lazy"
+--------------------------------------------------
+-- Load plugins
+--------------------------------------------------
+local lazy_config = require("configs.lazy")
 
--- load plugins
 require("lazy").setup({
-   {
-     "NvChad/NvChad",
-     lazy = false,
-     branch = "v2.5",
-     import = "nvchad.plugins",
-     config = function()
-       require "options"
-     end,
-   },
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require("options")
+    end,
+  },
 
   { import = "plugins" },
 }, lazy_config)
 
--- load theme
+--------------------------------------------------
+-- Load NvChad theme cache
+--------------------------------------------------
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require "nvchad.autocmds"
+--------------------------------------------------
+-- NvChad autocmds & mappings
+--------------------------------------------------
+require("nvchad.autocmds")
 
 vim.schedule(function()
-  require "mappings"
+  require("mappings")
 end)
 
-vim.cmd([[
-  augroup MyColors
-    autocmd!
-    autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight NonText guibg=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight LineNr guibg=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight Folded guibg=NONE ctermbg=NONE
-    autocmd ColorScheme * highlight EndOfBuffer guibg=NONE ctermbg=NONE
-  augroup END
-]])
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+--------------------------------------------------
+-- Extra autocmds (safe)
+--------------------------------------------------
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking",
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -60,6 +70,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "*",
-  command = "silent! w"
+  command = "silent! w",
+})
+vim.schedule(function()
+  vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+end)
+
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    for _, group in ipairs({
+      "NormalFloat",
+      "FloatBorder",
+      "TelescopeNormal",
+      "WhichKeyFloat",
+    }) do
+      vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+    end
+  end,
 })
 
