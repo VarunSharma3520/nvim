@@ -6,6 +6,7 @@ return {
 			require("configs.conform")
 		end,
 	},
+
 	-- LSP-related configurations from the `configs.lspconfig` module.
 	{
 		"neovim/nvim-lspconfig",
@@ -14,7 +15,14 @@ return {
 			require("configs.lspconfig")
 		end,
 	},
-	{
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
+  {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {},

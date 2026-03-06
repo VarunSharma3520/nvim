@@ -1,4 +1,3 @@
-
 -- Base46 cache path (required by NvChad)
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
 
@@ -58,7 +57,7 @@ vim.schedule(function()
 end)
 
 --------------------------------------------------
--- Extra autocmds (safe)
+-- Extra autocmds
 --------------------------------------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking",
@@ -72,10 +71,10 @@ vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "*",
   command = "silent! w",
 })
+
 vim.schedule(function()
   vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 end)
-
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
@@ -89,4 +88,3 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
   end,
 })
-

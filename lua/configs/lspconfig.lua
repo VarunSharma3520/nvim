@@ -1,17 +1,7 @@
-
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = {
-  "html",
-  "cssls",
-  "gopls",
-  "ts_ls",
-  "pyright",
-  "tailwindcss",
-  "eslint",
-  "rust_analyzer",
-  "bashls",
-}
+local mason_lspconfig = require("mason-lspconfig")
 
-vim.lsp.enable(servers)
-
+mason_lspconfig.setup({
+  automatic_installation = true,
+})
