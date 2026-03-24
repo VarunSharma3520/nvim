@@ -8,6 +8,13 @@ return {
 	},
 
 	-- LSP-related configurations from the `configs.lspconfig` module.
+	  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
