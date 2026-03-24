@@ -1,4 +1,3 @@
-
 # Ubuntu step-by-step install & setup guide
 
 > Run each command block **one at a time** (don’t paste the whole file). Where a command needs `sudo`, it’s marked. If a step requires a logout/reboot, that’s noted.

@@ -1,1 +1,3 @@
-require("nvchad.configs.lspconfig").defaults() local mason_lspconfig = require("mason-lspconfig") mason_lspconfig.setup({ automatic_installation = true, })
+require("nvchad.configs.lspconfig").defaults()
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup({ automatic_installation = true })
