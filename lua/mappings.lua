@@ -1,6 +1,7 @@
 require 'nvchad.mappings'
 local map = vim.keymap.set
 
+
 local telescope = require('telescope')
 local ls = require("luasnip")
 local harpoon = require("harpoon")
@@ -49,7 +50,10 @@ map("n", "<leader><ESC>", ":nohl<CR>", { desc = "no highlight" })
 -- open vscode
 map("n", "<leader>vsc", ":!code .<CR>", { desc = "open vs code in current directory" })
 
+-- auto-session
+map("n", "<leader>ss", ":AutoSession search <CR>", { desc = "enter normal mode" })
 
+-- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
