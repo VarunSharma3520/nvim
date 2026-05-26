@@ -1,7 +1,9 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require "lspconfig"
 
-mason_lspconfig.setup({
-  automatic_installation = true,
-})
+-- disable snyk explicitly
+-- lspconfig.snyk_ls.setup({
+--   autostart = false,
+--   cmd = { "false" }, -- hard disable
+-- })

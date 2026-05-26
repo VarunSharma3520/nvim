@@ -67,6 +67,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "NvimTree",
+  callback = function()
+    vim.cmd("hi NvimTreeNormal guibg=NONE ctermbg=NONE")
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "*",
   command = "silent! w",

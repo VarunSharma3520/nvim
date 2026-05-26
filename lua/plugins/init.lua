@@ -6,24 +6,23 @@ return {
 			require("configs.conform")
 		end,
 	},
- {
-  "rmagatti/auto-session",
-  lazy = false,
-  config = function ()
-    require("auto-session").setup {
-      log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-    }
-  end
-  },
-	-- LSP-related configurations from the `configs.lspconfig` module.
-	  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-  },
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		config = function()
+			require("auto-session").setup({
+				log_level = "error",
+				auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+			})
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+	},
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -31,14 +30,14 @@ return {
 			require("configs.lspconfig")
 		end,
 	},
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-  },
-  {
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+	},
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {},
@@ -46,7 +45,7 @@ return {
     keys = {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = {"o"},             function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "r",     mode = { "o" },           function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
@@ -100,8 +99,7 @@ return {
 				"rust",
 			},
 		},
-        auto_install = true, 
-
+		auto_install = true,
 	},
 	{
 		"windwp/nvim-ts-autotag",
@@ -194,7 +192,7 @@ return {
 		lazy = false,
 	},
 	{
-		"Exafunction/codeium.vim",
+		"Exafunction/windsurf.vim",
 		event = "BufEnter",
 	},
 	{ "debugloop/telescope-undo.nvim" },

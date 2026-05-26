@@ -41,6 +41,9 @@ M.ui = {
 		NvimTreeNormalNC = { bg = "NONE" },
 		NvimTreeEndOfBuffer = { bg = "NONE" },
 
+    TbFill = { bg = "NONE" },
+    TbBufOn = { bg = "NONE" },
+    TbBufOff = { bg = "NONE" },
 		-- Optional polish
 		Comment = { italic = true },
 		["@comment"] = { italic = true },

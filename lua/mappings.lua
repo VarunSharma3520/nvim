@@ -1,6 +1,6 @@
 require 'nvchad.mappings'
 local map = vim.keymap.set
-
+local nomap = vim.keymap.del
 
 local telescope = require('telescope')
 local ls = require("luasnip")
@@ -15,6 +15,7 @@ telescope.load_extension('file_browser')
 telescope.load_extension('undo')
 telescope.load_extension('harpoon')
 
+map("i", "<C-Space>", function() require("cmp").complete() end, { desc = "open completion menu" })
 map("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "telescope file browser" })
 map("n", "<leader>ft", "<cmd>Telescope harpoon marks<cr>", { desc = "telescope harpoon marks" })
 map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "telescope keymaps" })
