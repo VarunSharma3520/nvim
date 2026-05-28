@@ -1,97 +1,68 @@
--- Base46 cache path (required by NvChad)
-vim.g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
-
 vim.g.mapleader = " "
 vim.opt.clipboard = "unnamedplus"
 
---------------------------------------------------
--- Bootstrap lazy.nvim
---------------------------------------------------
+-- lazy bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
 end
 
 vim.opt.rtp:prepend(lazypath)
 
---------------------------------------------------
--- Load plugins
---------------------------------------------------
+-- lazy config
 local lazy_config = require("configs.lazy")
 
 require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-    config = function()
-      require("options")
-    end,
-  },
+	{ import = "plugins" },
+}, require("configs.lazy"))
 
-  { import = "plugins" },
-}, lazy_config)
+-- core configs AFTER plugins
+require("options")
+require("mappings")
 
---------------------------------------------------
--- Load NvChad theme cache
---------------------------------------------------
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-
---------------------------------------------------
--- NvChad autocmds & mappings
---------------------------------------------------
-require("nvchad.autocmds")
-
-vim.schedule(function()
-  require("mappings")
-end)
-
---------------------------------------------------
--- Extra autocmds
---------------------------------------------------
+-- autocmds
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "NvimTree",
-  callback = function()
-    vim.cmd("hi NvimTreeNormal guibg=NONE ctermbg=NONE")
-  end,
+	pattern = "NvimTree",
+	callback = function()
+		vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE" })
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufLeave", {
-  pattern = "*",
-  command = "silent! w",
+	pattern = "*",
+	command = "silent! w",
 })
 
+-- remove transparency
 vim.schedule(function()
-  vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+	vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 end)
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    for _, group in ipairs({
-      "NormalFloat",
-      "FloatBorder",
-      "TelescopeNormal",
-      "WhichKeyFloat",
-    }) do
-      vim.api.nvim_set_hl(0, group, { bg = "NONE" })
-    end
-  end,
+	callback = function()
+		for _, group in ipairs({
+			"Normal",
+			"NormalFloat",
+			"FloatBorder",
+			"TelescopeNormal",
+			"WhichKeyFloat",
+		}) do
+			vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+		end
+	end,
 })
