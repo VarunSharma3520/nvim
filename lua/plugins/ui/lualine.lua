@@ -72,6 +72,16 @@ return {
           },
 
           lualine_x = {
+            {
+              -- cmdheight=0 hides the built-in "recording @x" message
+              function()
+                return "󰑊 recording @" .. vim.fn.reg_recording()
+              end,
+              cond = function()
+                return vim.fn.reg_recording() ~= ""
+              end,
+              color = { fg = colors.red, gui = "bold" },
+            },
             "diagnostics",
             "encoding",
             "filetype",
@@ -103,6 +113,26 @@ return {
           "nvim-tree",
           "toggleterm",
         },
+      })
+
+      -- Refresh immediately instead of waiting for lualine's timer.
+      -- On RecordingLeave reg_recording() is still set, so defer past it.
+      local grp = vim.api.nvim_create_augroup("lualine-recording", { clear = true })
+
+      vim.api.nvim_create_autocmd("RecordingEnter", {
+        group = grp,
+        callback = function()
+          require("lualine").refresh()
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("RecordingLeave", {
+        group = grp,
+        callback = function()
+          vim.defer_fn(function()
+            require("lualine").refresh()
+          end, 50)
+        end,
       })
     end,
   },

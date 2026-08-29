@@ -41,9 +41,20 @@ return {
 
 	-- Misc
 	require("plugins.colorizer"),
-	require("plugins.windsurf"),
 	require("plugins.sourcegraph"),
 
 	-- Git (empty right now, but reserved properly)
 	-- require("plugins.git"),
+
+  {
+  "sphamba/smear-cursor.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- Target color will automatically match your cursor highlight group if set to "none"
+    cursor_color = "none", 
+    -- Fixes rendering artifacts in most terminal setups
+    hide_target_hack = true, 
+  },
+}
+
 }
