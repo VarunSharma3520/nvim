@@ -125,14 +125,18 @@ Verify:
 nvim --version
 ```
 
-**Install your Neovim config**
+**Install Neovim + your config (one command)**
+
+Installs dependencies, the latest Neovim, clones this config to `~/.config/nvim` (existing config is backed up), and syncs plugins:
 
 ```bash
-# clone and move config
-git clone https://github.com/VarunSharma3520/nvim.git
-mv nvim ~/.config/
-# Launch nvim once to allow plugin managers to bootstrap
-nvim
+curl -fsSL https://raw.githubusercontent.com/VarunSharma3520/nvim/main/setup.sh | bash
+```
+
+Or, if you already cloned the repo:
+
+```bash
+bash ~/.config/nvim/setup.sh
 ```
 
 > If you use a plugin manager (lazy.nvim, packer, etc.), follow its bootstrap instructions when nvim opens.
