@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local mappings = require("mappings")
 
 -- user event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
@@ -35,11 +36,21 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local create_cmd = vim.api.nvim_create_user_command
 
-create_cmd("TSInstallAll", function()
+local function ts_install_all()
   local spec = require("lazy.core.config").plugins["nvim-treesitter"]
   local opts = type(spec.opts) == "table" and spec.opts or {}
   require("nvim-treesitter").install(opts.ensure_installed)
-end, {})
+end
+
+create_cmd("TSInstallAll", ts_install_all, {})
+
+-- auto-install missing treesitter parsers on first launch
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    pcall(ts_install_all)
+  end,
+})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking",
@@ -68,6 +79,7 @@ end)
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     for _, group in ipairs({
+      "Normal",
       "NormalFloat",
       "FloatBorder",
       "TelescopeNormal",
@@ -126,7 +138,28 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			return
 		end
 
-		list:append()
+		list:add()
 		prune_if_needed()
+	end,
+})
+
+-- =========================
+-- lsp (nvchad-style)
+-- =========================
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("userlspattach", { clear = true }),
+	callback = function(args)
+		local bufnr = args.buf
+		local bufmap = mappings.lsp_buf_mappings(bufnr)
+
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client:supports_method("textDocument/inlayHint") then
+			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			bufmap("n", "<leader>uh", function()
+				local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+				vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+			end, "toggle inlay hints")
+		end
 	end,
 })

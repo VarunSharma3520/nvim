@@ -13,7 +13,7 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
 
       -- your custom config (optional file)
-      pcall(require, "configs.luasnip")
+      pcall(require, "plugins.configs.luasnip")
     end,
   },
 }

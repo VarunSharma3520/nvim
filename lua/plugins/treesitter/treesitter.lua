@@ -15,8 +15,6 @@ return {
 				"gosum",
 				"bash",
 				"c",
-				"css",
-				"html",
 				"json",
 				"typescript",
 				"markdown",
@@ -24,6 +22,5 @@ return {
 				"rust",
 			},
 		},
-		auto_install = true,
 	}
 }

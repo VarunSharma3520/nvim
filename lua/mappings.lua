@@ -23,7 +23,7 @@ map("n", "<leader><leader>", function()
 end, { desc = "Search snippets (Telescope)" })
 
 map({ "n", "x" }, "<leader>fm", function()
-  require("conform").format { lsp_fallback = true }
+	require("conform").format({ lsp_fallback = true })
 end, { desc = "general format file" })
 
 -- =========================
@@ -37,7 +37,6 @@ map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Old files" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search buffer" })
 
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "Git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "Git status" })
 
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "Pick terminals" })
 
@@ -155,7 +154,7 @@ map("n", "<leader>tQ", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix list
 -- HARPOON
 -- =========================
 map("n", "<leader>ha", function()
-	list:append()
+	list:add()
 end, { desc = "Harpoon add file" })
 
 map("n", "<leader>hr", function()
@@ -173,3 +172,31 @@ end, { desc = "Harpoon next" })
 map("n", "<S-Tab>", function()
 	list:prev()
 end, { desc = "Harpoon prev" })
+
+-- =========================
+-- lsp (nvchad-style)
+-- =========================
+
+local function lsp_buf_mappings(bufnr)
+	local bufmap = function(mode, lhs, rhs, desc)
+		map(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+	end
+
+	bufmap("n", "gd", vim.lsp.buf.declaration, "lsp declaration")
+	bufmap("n", "gd", vim.lsp.buf.definition, "lsp definition")
+	bufmap("n", "gi", vim.lsp.buf.implementation, "lsp implementation")
+	bufmap("n", "gr", vim.lsp.buf.references, "lsp references")
+	bufmap("n", "gt", vim.lsp.buf.type_definition, "lsp type definition")
+	bufmap("n", "gk", vim.lsp.buf.hover, "lsp hover")
+	bufmap("n", "<leader>ra", vim.lsp.buf.rename, "lsp rename")
+	bufmap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "lsp code action")
+	bufmap("n", "[d", vim.diagnostic.goto_prev, "prev diagnostic")
+	bufmap("n", "]d", vim.diagnostic.goto_next, "next diagnostic")
+	bufmap("n", "<leader>d", vim.diagnostic.open_float, "line diagnostics")
+
+	return bufmap
+end
+
+return {
+	lsp_buf_mappings = lsp_buf_mappings,
+}

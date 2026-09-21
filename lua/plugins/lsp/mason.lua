@@ -1,6 +1,13 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		lazy = false,
+		opts = {},
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = false,
+		dependencies = { "williamboman/mason.nvim" },
 		opts = {
 			ensure_installed = {
 				"lua-language-server",
@@ -21,5 +28,5 @@ return {
 				"rust-analyzer",
 			},
 		},
-	}
+	},
 }

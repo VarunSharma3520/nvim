@@ -38,6 +38,7 @@ return {
 	require("plugins.tools.conform"),
 	require("plugins.tools.markdown"),
 	require("plugins.tools.trouble"),
+	require("plugins.tools.toggleterm"),
 
 	-- Misc
 	require("plugins.colorizer"),

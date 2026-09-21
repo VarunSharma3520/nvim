@@ -1,9 +1,4 @@
-require("nvchad.configs.lspconfig").defaults()
-
-local lspconfig = require "lspconfig"
+require("mason-lspconfig").setup({ automatic_enable = true })
 
 -- disable snyk explicitly
--- lspconfig.snyk_ls.setup({
---   autostart = false,
---   cmd = { "false" }, -- hard disable
--- })
+-- vim.lsp.enable("snyk_ls", false)
