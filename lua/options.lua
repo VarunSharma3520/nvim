@@ -90,7 +90,7 @@ g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
-opt.wrap = false
+opt.wrap = true
 opt.swapfile = false
 opt.backup = false
 opt.writebackup = false
