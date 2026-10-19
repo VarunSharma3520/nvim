@@ -52,6 +52,16 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+-- open notes file when nvim is started with no file arguments
+vim.api.nvim_create_autocmd("VimEnter", {
+  nested = true,
+  callback = function()
+    if vim.fn.argc() == 0 then
+      vim.cmd("edit ~/Desktop/code/notes.md")
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking",
   group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
