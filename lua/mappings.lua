@@ -106,6 +106,15 @@ map("i", "<C-j>", "<Down>", { desc = "Down" })
 map("i", "<C-k>", "<Up>", { desc = "Up" })
 
 -- =========================
+-- WINDOW NAVIGATION
+-- =========================
+
+map("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+map("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+
+-- =========================
 -- SCROLL CENTERING
 -- =========================
 
