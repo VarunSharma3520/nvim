@@ -27,19 +27,12 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
-})
-
 local create_cmd = vim.api.nvim_create_user_command
 
 local function ts_install_all()
   local spec = require("lazy.core.config").plugins["nvim-treesitter"]
   local opts = type(spec.opts) == "table" and spec.opts or {}
-  require("nvim-treesitter").install(opts.ensure_installed)
+  require("nvim-treesitter.install").ensure_installed(opts.ensure_installed)
 end
 
 create_cmd("TSInstallAll", ts_install_all, {})

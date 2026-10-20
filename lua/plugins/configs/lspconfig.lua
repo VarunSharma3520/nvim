@@ -1,4 +1,11 @@
-require("mason-lspconfig").setup({ automatic_enable = true })
+local lspconfig = require("lspconfig")
+local mason_lspconfig = require("mason-lspconfig")
 
--- disable snyk explicitly
--- vim.lsp.enable("snyk_ls", false)
+mason_lspconfig.setup({
+  automatic_installation = true,
+  handlers = {
+    function(server_name)
+      lspconfig[server_name].setup({})
+    end,
+  },
+})
