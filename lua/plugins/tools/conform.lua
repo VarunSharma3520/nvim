@@ -9,6 +9,8 @@ return {
 					lua = { "stylua" },
 					css = { "prettier" },
 					html = { "prettier" },
+					rust = { "rustfmt" },
+					toml = { "taplo" },
 				},
 
 				format_on_save = {

@@ -4,8 +4,8 @@ return {
     build = ":TSUpdate",
     branch = "main",
     config = function()
-      require("nvim-treesitter").setup({
-        ensure_installed = {
+      -- main branch ignores ensure_installed; install() is the real API (no-op for installed parsers)
+      require("nvim-treesitter").install({
           "vim",
           "lua",
           "vimdoc",
@@ -23,7 +23,7 @@ return {
           "markdown",
           "markdown_inline",
           "rust",
-        },
+          "toml",
       })
     end,
   }

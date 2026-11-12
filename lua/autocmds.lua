@@ -3,6 +3,7 @@ local mappings = require("mappings")
 
 -- user event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
+  desc = "Startup: fire User FilePost once a real file is open",
   group = vim.api.nvim_create_augroup("NvFilePost", { clear = true }),
   callback = function(args)
     local file = vim.api.nvim_buf_get_name(args.buf)
@@ -39,6 +40,7 @@ create_cmd("TSInstallAll", ts_install_all, {})
 
 -- auto-install missing treesitter parsers on first launch
 vim.api.nvim_create_autocmd("VimEnter", {
+  desc = "Treesitter: install missing parsers",
   once = true,
   callback = function()
     pcall(ts_install_all)
@@ -47,6 +49,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- open notes file when nvim is started with no file arguments
 vim.api.nvim_create_autocmd("VimEnter", {
+  desc = "Startup: open notes.md when no file given",
   nested = true,
   callback = function()
     if vim.fn.argc() == 0 then
@@ -56,7 +59,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking",
+  desc = "Edit: highlight yanked text",
   group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
@@ -64,6 +67,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "Tree: transparent background",
   pattern = "NvimTree",
   callback = function()
     vim.cmd("hi NvimTreeNormal guibg=NONE ctermbg=NONE")
@@ -71,6 +75,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("BufLeave", {
+  desc = "File: auto-save when leaving buffer",
   pattern = "*",
   command = "silent! w",
 })
@@ -80,6 +85,7 @@ vim.schedule(function()
 end)
 
 vim.api.nvim_create_autocmd("ColorScheme", {
+  desc = "UI: keep backgrounds transparent",
   callback = function()
     for _, group in ipairs({
       "Normal",
@@ -128,6 +134,7 @@ local function prune_if_needed()
 end
 
 vim.api.nvim_create_autocmd("BufEnter", {
+	desc = "Harpoon: auto-add visited files",
 	callback = function(args)
 		local buf = args.buf
 
@@ -151,6 +158,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- =========================
 
 vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP: set buffer keymaps and inlay hints",
 	group = vim.api.nvim_create_augroup("userlspattach", { clear = true }),
 	callback = function(args)
 		local bufnr = args.buf
@@ -162,7 +170,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			bufmap("n", "<leader>uh", function()
 				local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 				vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
-			end, "toggle inlay hints")
+			end, "LSP: toggle inlay hints")
 		end
 	end,
 })

@@ -26,6 +26,8 @@ return {
 				"typos-lsp",
 				"vscode-solidity-server",
 				"rust-analyzer",
+				"taplo",
+				"codelldb",
 			},
 		},
 	},

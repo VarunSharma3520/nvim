@@ -12,8 +12,8 @@ return {
 		version = "*",
 		cmd = { "ToggleTerm", "TermExec" },
 		keys = {
-			{ "<C-\\>", "<cmd>ToggleTerm<CR>", desc = "Toggle terminal", mode = { "n", "t" } },
-			{ "<leader>tf", toggle_float, desc = "Toggle floating terminal", mode = { "n", "t" } },
+			{ "<C-\\>", "<cmd>ToggleTerm<CR>", desc = "Terminal: toggle horizontal", mode = { "n", "t" } },
+			{ "<leader>tf", toggle_float, desc = "Terminal: toggle floating", mode = { "n", "t" } },
 		},
 		opts = {
 			size = 15,

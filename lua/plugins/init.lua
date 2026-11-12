@@ -20,7 +20,6 @@ return {
 	-- Editor
 	require("plugins.editor.autopairs"),
 	require("plugins.editor.auto-session"),
-	require("plugins.editor.comment"),
 	require("plugins.editor.flash"),
 	require("plugins.editor.harpoon"),
 	require("plugins.editor.surround"),
@@ -39,13 +38,14 @@ return {
 	require("plugins.tools.markdown"),
 	require("plugins.tools.trouble"),
 	require("plugins.tools.toggleterm"),
+	require("plugins.tools.dap"),
 
 	-- Misc
 	require("plugins.colorizer"),
 	require("plugins.sourcegraph"),
 
-	-- Git (empty right now, but reserved properly)
-	-- require("plugins.git"),
+	-- Git
+	require("plugins.git.gitsigns"),
 
   {
   "sphamba/smear-cursor.nvim",

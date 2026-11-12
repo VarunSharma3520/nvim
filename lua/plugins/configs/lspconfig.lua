@@ -1,11 +1,14 @@
-local lspconfig = require("lspconfig")
-local mason_lspconfig = require("mason-lspconfig")
+-- mason-lspconfig v2 auto-enables installed servers via vim.lsp.config; `handlers` is no longer read
+vim.lsp.config("*", {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
 
-mason_lspconfig.setup({
-  automatic_installation = true,
-  handlers = {
-    function(server_name)
-      lspconfig[server_name].setup({})
-    end,
+vim.lsp.config("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      check = { command = "clippy" },
+    },
   },
 })
+
+require("mason-lspconfig").setup()

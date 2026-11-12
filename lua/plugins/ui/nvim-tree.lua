@@ -18,7 +18,7 @@ return {
 						noremap = true,
 						silent = true,
 						nowait = true,
-						desc = "nvim-tree: " .. desc,
+						desc = "Tree: " .. desc,
 					})
 				end
 
@@ -76,6 +76,7 @@ return {
 
 			-- moved from tree to another (non-floating) window
 			vim.api.nvim_create_autocmd("WinLeave", {
+				desc = "Tree: close when focus moves to another window",
 				group = group,
 				callback = function()
 					if vim.bo.filetype ~= "NvimTree" then
@@ -105,6 +106,7 @@ return {
 
 			-- terminal/tmux lost focus (new tab, other window, other app)
 			vim.api.nvim_create_autocmd("FocusLost", {
+				desc = "Tree: close when terminal loses focus",
 				group = group,
 				callback = function()
 					api.tree.close()

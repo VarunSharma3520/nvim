@@ -1,0 +1,46 @@
+# the default speed for mouse movement and scrolling
+baseMouseSpeed: 750.0
+baseScrollSpeed: 20.0
+
+# ramp up instead of jumping to full speed: short taps nudge precisely, holding gets fast
+startMouseSpeed: 100.0
+mouseAccelerationTime: 400.0
+# >1 spends more of the ramp at low speed, for fine aiming
+mouseAccelerationCurve: 2.0
+# stop quickly on release to avoid overshooting
+mouseDecelerationTime: 100.0
+mouseDecelerationCurve: 1.0
+
+# the rest of the config defines the layers with their bindings
+layers:
+# the first layer is active at start
+- name: initial
+  bindings:
+    # when tab is held and another key pressed, activate mouse layer
+    tab: tap-hold-next tab ; toggle-layer mouse ; 500
+    # when a is held for 300ms, activate mouse layer
+    a: tap-hold a ; toggle-layer mouse ; 300
+# a layer for mouse movement
+- name: mouse
+  # when true, keys that are not mapped keep their original meaning
+  passThrough: true
+  bindings:
+    # quit mouse layer (q or i, like leaving normal mode for insert)
+    q: layer initial
+    i: layer initial
+    # keep the mouse layer active
+    space: layer mouse
+    # hjkl movement
+    h: move -1  0
+    j: move  0  1
+    k: move  0 -1
+    l: move  1  0
+    # u/d scroll like ctrl+u / ctrl+d
+    u: scroll up
+    d: scroll down
+    leftalt: speed 3.0
+    e: speed 0.3
+    capslock: speed 0.1
+    f: button left
+    g: button middle
+    s: button right
