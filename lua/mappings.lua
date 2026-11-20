@@ -76,7 +76,7 @@ map("n", "<leader>fr", function()
 end, { desc = "Edit: find & replace word under cursor in file" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "Find: marks" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "Find: terminals" })
-map("n", "<leader>th", "<cmd>Telescope colorscheme<CR>", { desc = "UI: pick colorscheme" })
+map("n", "<leader>th", "<cmd>Telescope colorscheme enable_preview=true<CR>", { desc = "UI: pick colorscheme" })
 
 -- =========================
 -- GIT (hunk keys live in plugins/git/gitsigns.lua)

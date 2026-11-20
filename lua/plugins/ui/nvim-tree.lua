@@ -74,9 +74,36 @@ return {
 			local api = require("nvim-tree.api")
 			local group = vim.api.nvim_create_augroup("NvimTreeAutoClose", { clear = true })
 
+			-- delayed close: wait before closing, cancel if the user comes back
+			local CLOSE_DELAY_MS = 5000
+			local delay_timer = vim.uv.new_timer()
+			local pending_reason = nil -- "winleave" | "focuslost" | nil
+
+			local function cancel_delayed_close()
+				delay_timer:stop()
+				pending_reason = nil
+			end
+
+			local function schedule_close(reason)
+				-- a window-leave close is already counting down; let it finish
+				if pending_reason == "winleave" and reason == "focuslost" then
+					return
+				end
+				delay_timer:stop()
+				pending_reason = reason
+				delay_timer:start(CLOSE_DELAY_MS, 0, vim.schedule_wrap(function()
+					pending_reason = nil
+					-- user is back in the tree: keep it open
+					if vim.bo.filetype == "NvimTree" then
+						return
+					end
+					api.tree.close()
+				end))
+			end
+
 			-- moved from tree to another (non-floating) window
 			vim.api.nvim_create_autocmd("WinLeave", {
-				desc = "Tree: close when focus moves to another window",
+				desc = "Tree: close 5s after focus moves to another window",
 				group = group,
 				callback = function()
 					if vim.bo.filetype ~= "NvimTree" then
@@ -88,9 +115,20 @@ return {
 							return
 						end
 						if vim.bo.filetype ~= "NvimTree" then
-							api.tree.close()
+							schedule_close("winleave")
 						end
 					end)
+				end,
+			})
+
+			-- came back into the tree: cancel any pending close
+			vim.api.nvim_create_autocmd("WinEnter", {
+				desc = "Tree: cancel pending close when re-entering the tree",
+				group = group,
+				callback = function()
+					if vim.bo.filetype == "NvimTree" then
+						cancel_delayed_close()
+					end
 				end,
 			})
 
@@ -102,14 +140,28 @@ return {
 			end)
 			api.events.subscribe(api.events.Event.TreeClose, function()
 				close_timer:stop()
+				cancel_delayed_close()
 			end)
 
 			-- terminal/tmux lost focus (new tab, other window, other app)
 			vim.api.nvim_create_autocmd("FocusLost", {
-				desc = "Tree: close when terminal loses focus",
+				desc = "Tree: close 5s after terminal loses focus",
 				group = group,
 				callback = function()
-					api.tree.close()
+					if api.tree.is_visible() then
+						schedule_close("focuslost")
+					end
+				end,
+			})
+
+			-- terminal regained focus: cancel a focus-lost close
+			vim.api.nvim_create_autocmd("FocusGained", {
+				desc = "Tree: cancel pending close when terminal regains focus",
+				group = group,
+				callback = function()
+					if pending_reason == "focuslost" then
+						cancel_delayed_close()
+					end
 				end,
 			})
 		end,
